@@ -43,6 +43,8 @@ parser.add_argument('--resume', action='store_true', dest='resume',
 parser.add_argument('--log-level', dest='log_level',
                     default='info',
                     help='Logging level.')
+parser.add_argument('--test-file', dest='test_file',
+                    default='test.txt', help='when running test')
 
 opt = parser.parse_args()
 
@@ -132,9 +134,13 @@ else:
                       teacher_forcing_ratio=0.5,
                       resume=opt.resume)
 
-predictor = Predictor(seq2seq, input_vocab, output_vocab)
+if opt.load_checkpoint is not None:
+    predictor = Predictor(seq2seq, input_vocab, output_vocab)
+    for seq_str in open(opt.text_file):
+        seq = seq_str.strip().split()
+        print(predictor.predict(seq))
 
-while True:
-    seq_str = raw_input("Type in a source sequence:")
-    seq = seq_str.strip().split()
-    print(predictor.predict(seq))
+# while True:
+#     seq_str = raw_input("Type in a source sequence:")
+#     seq = seq_str.strip().split()
+#     print(predictor.predict(seq))

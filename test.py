@@ -35,7 +35,7 @@ parser.add_argument('--expt_dir', action='store', dest='expt_dir', default='./ex
 parser.add_argument('--load_checkpoint', action='store', dest='load_checkpoint',
                     help='The name of the checkpoint to load, usually an encoded time string')
 parser.add_argument('--test-file', dest='test_file',
-                    default='./experiment/', help='when running test')
+                    default='test.txt', help='when running test')
 
 opt = parser.parse_args()
 
