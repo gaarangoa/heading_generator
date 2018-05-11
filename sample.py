@@ -136,7 +136,7 @@ else:
 
 if opt.load_checkpoint is not None:
     predictor = Predictor(seq2seq, input_vocab, output_vocab)
-    for seq_str in open(opt.text_file):
+    for seq_str in open(opt.test_file):
         seq = seq_str.strip().split()
         print(predictor.predict(seq))
 
