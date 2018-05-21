@@ -52,11 +52,12 @@ def chunks(l, n):
 
 data3 = []
 for i in tqdm(data2):
-    for k in chunks( i[0].split('\t'), 10 ):
+    for k in chunks( i[0].split('\t'), 5 ):
         doc = nlp(" ".join(k))
-        rdoc = " ".join(list(set([token.text for token in doc if token.pos_ in ["NOUN", 'VERB', 'AUX'] ])))
+        rdoc = " ".join([token.text for token in doc if token.pos_ in ["NOUN", 'VERB', 'AUX'] ])
         if len(i[1]) > 50 and len( rdoc )>100:
             data3.append(rdoc+"\t"+i[1].replace('\t', '').replace('\n','')+"\n")
+        continue
 
 random.shuffle(data3)
 
@@ -68,8 +69,8 @@ print('len data', len(data3))
 
 for ix,item in enumerate(data3):
     if ix < 0.7*len(data3):
-        to.write(item.lower().replace('\0', ''))
+        to.write(item.lower().replace('', ''))
     elif 0.7*len(data3) <= ix <= 0.9*len(data3):
         tv.write(item.lower().replace('\0', ''))
     elif ix > 0.9*len(data3):
-        tt.write(item.lower().x.replace('\0', ''))
+        tt.write(item.lower().replace('\0', ''))
