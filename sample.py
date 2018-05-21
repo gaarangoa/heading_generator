@@ -49,7 +49,7 @@ parser.add_argument('--test-file', dest='test_file',
 parser.add_argument('--epoch', dest='epoch',
                     default=25, help='number of epochs for training')
 
-parser.add_argument('--max-len', dest='max_len',
+parser.add_argument('--max_len', dest='max_len',
                     default=100, help='maximum sequence length')
 
 opt = parser.parse_args()
