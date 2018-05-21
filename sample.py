@@ -73,9 +73,8 @@ else:
     src = SourceField()
     tgt = TargetField()
 
-    print(max_len)
-
     max_len = opt.max_len
+    print(max_len)
 
     def len_filter(example):
         try:
