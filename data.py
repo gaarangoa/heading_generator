@@ -53,8 +53,9 @@ def chunks(l, n):
 data3 = []
 for i in tqdm(data2):
     for k in chunks( i[0].split('\t'), 5 ):
-        doc = nlp(" ".join(k))
-        rdoc = " ".join([token.text for token in doc if token.pos_ in ["NOUN", 'VERB', 'AUX'] ])
+        # doc = nlp(" ".join(k))
+        # rdoc = " ".join([token.text for token in doc if token.pos_ in ["NOUN", 'VERB', 'AUX'] ])
+        rdoc = " ".join(k)
         if len(i[1]) > 50 and len( rdoc )>100:
             data3.append(rdoc+"\t"+i[1].replace('\t', '').replace('\n','')+"\n")
         continue
@@ -74,3 +75,7 @@ for ix,item in enumerate(data3):
         tv.write(item.lower())
     elif ix > 0.9*len(data3):
         tt.write(item.lower())
+
+to.close()
+tv.close()
+tt.close()
