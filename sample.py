@@ -142,7 +142,7 @@ else:
                           print_every=10, expt_dir=opt.expt_dir)
 
     seq2seq = t.train(seq2seq, train,
-                      num_epochs=opt.ecpoch, dev_data=dev,
+                      num_epochs=opt.epoch, dev_data=dev,
                       optimizer=optimizer,
                       teacher_forcing_ratio=0.5,
                       resume=opt.resume)
