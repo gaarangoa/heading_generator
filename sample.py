@@ -24,9 +24,9 @@ except NameError:
 #     # training
 #     python examples/sample.py --train_path $TRAIN_PATH --dev_path $DEV_PATH --expt_dir $EXPT_PATH
 #     # resuming from the latest checkpoint of the experiment
-#      python examples/sample.py --train_path $TRAIN_PATH --dev_path $DEV_PATH --expt_dir $EXPT_PATH --resume
-#      # resuming from a specific checkpoint
-#      python examples/sample.py --train_path $TRAIN_PATH --dev_path $DEV_PATH --expt_dir $EXPT_PATH --load_checkpoint $CHECKPOINT_DIR
+#     python examples/sample.py --train_path $TRAIN_PATH --dev_path $DEV_PATH --expt_dir $EXPT_PATH --resume
+#     # resuming from a specific checkpoint
+#     python examples/sample.py --train_path $TRAIN_PATH --dev_path $DEV_PATH --expt_dir $EXPT_PATH --load_checkpoint $CHECKPOINT_DIR
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--train_path', action='store', dest='train_path',
@@ -66,10 +66,17 @@ else:
     # Prepare dataset
     src = SourceField()
     tgt = TargetField()
-    max_len = 50
+
+    print(seq2seq.src_field_name)
+
+    max_len = 1000
 
     def len_filter(example):
-        return len(example.src) <= max_len and len(example.tgt) <= max_len
+        try:
+            return len(example.src) <= max_len and len(example.tgt) <= max_len
+        except:
+            print(example)
+
     train = torchtext.data.TabularDataset(
         path=opt.train_path, format='tsv',
         fields=[('src', src), ('tgt', tgt)],
