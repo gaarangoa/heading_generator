@@ -75,7 +75,7 @@ else:
         try:
             return len(example.src) <= max_len and len(example.tgt) <= max_len
         except:
-            print(example)
+            return False
 
     train = torchtext.data.TabularDataset(
         path=opt.train_path, format='tsv',
