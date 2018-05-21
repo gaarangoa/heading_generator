@@ -6,6 +6,14 @@ import sys
 reload(sys)
 sys.setdefaultencoding('utf-8')
 
+from collections import Counter
+from tqdm import tqdm
+
+import spacy
+from spacy.lang.es.examples import sentences
+
+nlp = spacy.load('es_core_news_sm')
+
 # start mongo database
 # mongod --dbpath /Volumes/drive/projects/umayux/models/mongo/ --port 11914 --directoryperdb
 
@@ -43,10 +51,12 @@ def chunks(l, n):
         yield l[i:i + n]
 
 data3 = []
-for i in data2:
-    for k in chunks( i[0].split('\t'), 1 ):
-        if len(i[1]) > 20 and len(" ".join(k) )>50:
-            data3.append(" ".join(k)+"\t"+i[1].replace('\t', '').replace('\n','')+"\n")
+for i in tqdm(data2):
+    for k in chunks( i[0].split('\t'), 10 ):
+        doc = nlp(" ".join(k))
+        rdoc = " ".join(list(set([token.text for token in doc if token.pos_ in ["NOUN", 'VERB', 'AUX'] ])))
+        if len(i[1]) > 50 and len( rdoc )>100:
+            data3.append(rdoc+"\t"+i[1].replace('\t', '').replace('\n','')+"\n")
 
 random.shuffle(data3)
 
