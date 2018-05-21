@@ -68,8 +68,8 @@ print('len data', len(data3))
 
 for ix,item in enumerate(data3):
     if ix < 0.7*len(data3):
-        to.write(item.lower())
+        to.write(item.lower().replace('\0', ''))
     elif 0.7*len(data3) <= ix <= 0.9*len(data3):
-        tv.write(item.lower())
+        tv.write(item.lower().replace('\0', ''))
     elif ix > 0.9*len(data3):
-        tt.write(item.lower())
+        tt.write(item.lower().x.replace('\0', ''))
