@@ -46,6 +46,12 @@ parser.add_argument('--log-level', dest='log_level',
 parser.add_argument('--test-file', dest='test_file',
                     default='test.txt', help='when running test')
 
+parser.add_argument('--epoch', dest='epoch',
+                    default=25, help='number of epochs for training')
+
+parser.add_argument('--max-len', dest='max_len',
+                    default=100, help='maximum sequence length')
+
 opt = parser.parse_args()
 
 LOG_FORMAT = '%(asctime)s %(name)-12s %(levelname)-8s %(message)s'
@@ -69,7 +75,7 @@ else:
 
     print(seq2seq.src_field_name)
 
-    max_len = 200
+    max_len = opt.max_len
 
     def len_filter(example):
         try:
@@ -136,7 +142,7 @@ else:
                           print_every=10, expt_dir=opt.expt_dir)
 
     seq2seq = t.train(seq2seq, train,
-                      num_epochs=100, dev_data=dev,
+                      num_epochs=opt.ecpoch, dev_data=dev,
                       optimizer=optimizer,
                       teacher_forcing_ratio=0.5,
                       resume=opt.resume)

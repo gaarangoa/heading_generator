@@ -44,8 +44,8 @@ def chunks(l, n):
 
 data3 = []
 for i in data2:
-    for k in chunks(i[0].split('\t'), 10):
-        if len(i[1]) > 20:
+    for k in chunks( i[0].split('\t'), 1 ):
+        if len(i[1]) > 20 and len(" ".join(k) )>50:
             data3.append(" ".join(k)+"\t"+i[1].replace('\t', '').replace('\n','')+"\n")
 
 random.shuffle(data3)
@@ -57,9 +57,9 @@ tt = open('./data/test/data.txt', 'w')
 print('len data', len(data3))
 
 for ix,item in enumerate(data3):
-    if ix < 14000:
+    if ix < 0.7*len(data3):
         to.write(item.lower())
-    elif 14000 <= ix <= 15000:
+    elif 0.7*len(data3) <= ix <= 0.9*len(data3):
         tv.write(item.lower())
-    elif ix > 15000:
+    elif ix > 0.9*len(data3):
         tt.write(item.lower())
