@@ -73,7 +73,7 @@ else:
     src = SourceField()
     tgt = TargetField()
 
-    print(seq2seq.src_field_name)
+    print(max_len)
 
     max_len = opt.max_len
 
