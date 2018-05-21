@@ -73,7 +73,7 @@ else:
 
     def len_filter(example):
         try:
-            return len(example.src) <= max_len and len(example.tgt) <= max_len
+            return 10 <= len(example.src) <= max_len and 10 <=len(example.tgt) <= max_len
         except:
             return False
 
